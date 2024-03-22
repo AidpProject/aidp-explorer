@@ -1,10 +1,10 @@
 import fs from "fs";
 
 const defaultConfig = {
-  baseCurrency: "RVN",
-  raven_password: "anonymous",
-  raven_username: "anonymous",
-  raven_url: "https://rvn-rpc-testnet.ting.finance/rpc",
+  baseCurrency: "AIDP",
+  aidp_password: "anonymous",
+  aidp_username: "anonymous",
+  aidp_url: "https://rvn-rpc-testnet.ting.finance/rpc",
   httpPort: 80,
   headline: "Ravencoin Testnet",
   theme: "dark",
@@ -30,7 +30,7 @@ function createConfigIfNeeded() {
 }
 
 function validateConfig(config) {
-  if (!config.raven_password) {
+  if (!config.aidp_password) {
     throw new Error(PROMPT_USER_TO_UPDATE_MESSAGE);
   }
 }

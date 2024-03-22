@@ -1,5 +1,5 @@
-import { getRPC, methods } from "@ravenrebels/ravencoin-rpc";
-import Reader from "@ravenrebels/ravencoin-reader";
+import { getRPC, methods } from "@aidpproject/aidpcoin-rpc";
+import Reader from "@aidpproject/aidpcoin-reader";
 
 import axios from "axios";
 /*
@@ -11,19 +11,19 @@ All blockchain operations to into this file
 import getConfig from "./getConfig.js";
 const CONFIG = getConfig();
 const rpc = getRPC(
-  CONFIG.raven_username,
-  CONFIG.raven_password,
-  CONFIG.raven_url
+  CONFIG.aidp_username,
+  CONFIG.aidp_password,
+  CONFIG.aidp_url
 );
 
-Reader.setURL(CONFIG.raven_url);
-Reader.setUsername(CONFIG.raven_username);
-Reader.setPassword(CONFIG.raven_password);
+Reader.setURL(CONFIG.aidp_url);
+Reader.setUsername(CONFIG.aidp_username);
+Reader.setPassword(CONFIG.aidp_password);
 
 const options = {
   auth: {
-    username: CONFIG.raven_username,
-    password: CONFIG.raven_password,
+    username: CONFIG.aidp_username,
+    password: CONFIG.aidp_password,
   },
 };
 export function getAddressUTXOs(address) {
@@ -77,7 +77,7 @@ export async function listAssets() {
   return rpc("listassets", [asset, verbose]);
 }
 export async function getAddressBalance(address) {
-  const balance = await Reader.getRavencoinBalance(address);
+  const balance = await Reader.getAidpcoinBalance(address);
   balance.assets = await Reader.getAssetBalance(address);
   return balance;
 }
@@ -154,7 +154,7 @@ export async function getBlockHashes(start, end) {
     requests.push(data);
   }
 
-  const rpcResponse = await axios.post(CONFIG.raven_url, requests, options);
+  const rpcResponse = await axios.post(CONFIG.aidp_url, requests, options);
 
   const hashes = rpcResponse.data.map((item) => {
     return item.result;
@@ -176,7 +176,7 @@ async function getBlocksByHashes(hashes) {
   });
 
   const blocksResponse = await axios.post(
-    CONFIG.raven_url,
+    CONFIG.aidp_url,
     blocksRequests,
     options
   );
